@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CMDatabase" Class="dbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=CMDatabase;Integrated Security=True" SettingsObjectName="EmailNotificationService.Properties.Settings" SettingsPropertyName="CMDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.[__EFMigrationsHistory]" Member="__EFMigrationsHistories">
+    <Type Name="__EFMigrationsHistory">
+      <Column Name="MigrationId" Type="System.String" DbType="NVarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductVersion" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceUrls" Member="InvoiceUrls">
+    <Type Name="InvoiceUrl">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="IsUrlUsed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="UploadedInvoicePath" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="IsSent" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SentAt" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="ExpiredAt" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_InvoiceUrl" Member="AspNetUser" ThisKey="CreatedBy" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="CustomerProfile_InvoiceUrl" Member="CustomerProfile" ThisKey="CustomerProfileId" OtherKey="Id" Type="CustomerProfile" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoleClaims" Member="AspNetRoleClaims">
+    <Type Name="AspNetRoleClaim">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetRole_AspNetRoleClaim" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
+    <Type Name="AspNetRole">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="NormalizedName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ConcurrencyStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetRole_AspNetRoleClaim" Member="AspNetRoleClaims" ThisKey="Id" OtherKey="RoleId" Type="AspNetRoleClaim" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserClaims" Member="AspNetUserClaims">
+    <Type Name="AspNetUserClaim">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
+    <Type Name="AspNetUserLogin">
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderDisplayName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
+    <Type Name="AspNetUserRole">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="NormalizedUserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="NormalizedEmail" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ConcurrencyStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEnd" Type="System.DateTimeOffset" DbType="DateTimeOffset" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_InvoiceUrl" Member="InvoiceUrls" ThisKey="Id" OtherKey="CreatedBy" Type="InvoiceUrl" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_AspNetUserToken" Member="AspNetUserTokens" ThisKey="Id" OtherKey="UserId" Type="AspNetUserToken" />
+      <Association Name="AspNetUser_CustomerProfile" Member="CustomerProfiles" ThisKey="Id" OtherKey="CreatedBy" Type="CustomerProfile" />
+      <Association Name="AspNetUser_CustomerProfile1" Member="CustomerProfiles1" ThisKey="Id" OtherKey="CustomerUserId" Type="CustomerProfile" />
+      <Association Name="AspNetUser_CustomerProfile2" Member="CustomerProfiles2" ThisKey="Id" OtherKey="UpdatedBy" Type="CustomerProfile" />
+      <Association Name="AspNetUser_CustomerRecord" Member="CustomerRecords" ThisKey="Id" OtherKey="CreatedBy" Type="CustomerRecord" />
+      <Association Name="AspNetUser_CustomerRecord1" Member="CustomerRecords1" ThisKey="Id" OtherKey="UpdatedBy" Type="CustomerRecord" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserTokens" Member="AspNetUserTokens">
+    <Type Name="AspNetUserToken">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(450) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserToken" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerProfiles" Member="CustomerProfiles">
+    <Type Name="CustomerProfile">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerUserId" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProfilePicture" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedBy" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="UpdatedAt" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Association Name="CustomerProfile_InvoiceUrl" Member="InvoiceUrls" ThisKey="Id" OtherKey="CustomerProfileId" Type="InvoiceUrl" />
+      <Association Name="CustomerProfile_CustomerRecord" Member="CustomerRecords" ThisKey="Id" OtherKey="CustomerProfileId" Type="CustomerRecord" />
+      <Association Name="AspNetUser_CustomerProfile" Member="AspNetUser" ThisKey="CreatedBy" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="AspNetUser_CustomerProfile1" Member="AspNetUser1" ThisKey="CustomerUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="AspNetUser_CustomerProfile2" Member="AspNetUser2" ThisKey="UpdatedBy" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerRecords" Member="CustomerRecords">
+    <Type Name="CustomerRecord">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerProfileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedBy" Type="System.String" DbType="NVarChar(450)" CanBeNull="true" />
+      <Column Name="UpdatedAt" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_CustomerRecord" Member="AspNetUser" ThisKey="CreatedBy" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="AspNetUser_CustomerRecord1" Member="AspNetUser1" ThisKey="UpdatedBy" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="CustomerProfile_CustomerRecord" Member="CustomerProfile" ThisKey="CustomerProfileId" OtherKey="Id" Type="CustomerProfile" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ErrorLogs" Member="ErrorLogs">
+    <Type Name="ErrorLog">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ErrorSource" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ErrorStackTrace" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ErrorDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
